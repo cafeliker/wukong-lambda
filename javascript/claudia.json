@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "wukong-executor",
+    "name": "wukong",
+    "region": "eu-west-1"
+  },
+  "api": {
+    "id": "lqei7jhpzd",
+    "module": "bot"
+  }
+}

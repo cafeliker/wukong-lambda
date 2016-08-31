@@ -1,0 +1,29 @@
+{
+  "name": "wukong",
+  "version": "1.0.1",
+  "description": "This is a bot service named wukong running in AWS lambda and deployed with claudia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cafeliker/wukong-lambda"
+  },
+  "keywords": [
+    "claudia",
+    "aws",
+    "lambda",
+    "apigateway",
+    "bot",
+    "slack"
+  ],
+  "author": "Ye Liu <ye.liu@hp.com>, Jun Li <jun.li7@hp.com>",
+  "license": "MIT",
+  "dependencies": {
+    "claudia-bot-builder": "~1.4.1",
+    "huh": "~1.1.4",
+    "aws-sdk": "^2.2.31",
+    "util": "~0.10.3"
+  }
+}
