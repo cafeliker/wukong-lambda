@@ -76,8 +76,16 @@ def show_help_and_exit():
     """
 
 def ghe_orgs():
-    return "showing orgs!"
     
+    handler=urllib2.HTTPHandler(debuglevel=1)
+    opener = urllib2.build_opener(handler)
+    urllib2.install_opener(opener)
+    request = urllib2.Request(ghe_license_url, headers={"Authorization" : par_ghe_header})
+    log.debug (request)
+    contents = json.loads(urllib2.urlopen(request).read())
+
+    return str(contents['total_orgs']) +  ' organizations, ' +  str(contents['disabled_orgs']) + ' disabled.\n ' + str(contents['total_teams']) + '  teams with ' + str(contents['total_team_members']) + ' members.'
+
 def ghe_users():
     return "showing users!"
     
