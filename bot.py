@@ -85,7 +85,17 @@ def ghe_repos():
     return "showing repos!"
     
 def ghe_license():
-    return "showing licenses"
+    ghe_license_url = url + '/enterprise/settings/license'
+    
+    handler=urllib2.HTTPHandler(debuglevel=1)
+    opener = urllib2.build_opener(handler)
+    urllib2.install_opener(opener)
+    request = urllib2.Request(ghe_license_url, headers={"Authorization" : par_ghe_header})
+    log.debug (request)
+    contents = json.loads(urllib2.urlopen(request).read())
+
+    return 'The GHE has ' + str(contents['seats']) +  'seats, and' +  str(contents['seats_used']) + ' are used, ' + str(contents['seats_available']) + ' seats available, License expires at ' + str(contents['expire_at'])
+    
     
 def ghe_main(command, options):
     command_only_list = {
