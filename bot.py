@@ -165,7 +165,7 @@ def lambda_handler(event, context):
     #session = boto3.session.Session(region_name='us-west-2')
     #ec2 = session.resource('ec2')
     #ec2 = boto3.client('ec2', region_name='us-west-2')
-    #ec2 = boto3.resource('ec2')
+    ec2 = boto3.resource('ec2')
     #ec2 = boto3.resource('ec2', region_name='us-west-2')
 
     filters = [
