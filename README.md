@@ -1,6 +1,6 @@
 # wukong-lambda
 
-This is a bot service named wukong and running in AWS lambda. We use Claudia for the Lambda deployment - https://github.com/claudiajs/claudia-bot-builder.
+This is a bot service named wukong and running in AWS Lambda. After a little technical investigation, we decided to use Python than NodeJS as the Lambda funtion runtime.
 
 
 Slack room is at https://huaguomountain.slack.com. 
