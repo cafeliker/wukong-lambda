@@ -190,10 +190,6 @@ def lambda_handler(event, context):
     log.debug("[lambda_handler] feature:'{0}' command:'{1}' options:'{2}'".format(
         feature, command, options))
         
-   # if feature not in feature_list:
-#        return {
-#            'text' : "I don't know what '{feature}' is. Perhaps you need to google it :-)".format(feature=feature)
-#        }
     log.debug ('feature: ' + str(feature))
 
     if (feature == 'help'):
@@ -212,45 +208,7 @@ def lambda_handler(event, context):
         return {
             'text' : identify_problem(raw_args)
             }
-    
-
         
-    #define the connection
-    #session = boto3.session.Session(region_name='us-west-2')
-    #ec2 = session.resource('ec2')
-    #ec2 = boto3.client('ec2', region_name='us-west-2')
-    ec2 = boto3.resource('ec2')
-    #ec2 = boto3.resource('ec2', region_name='us-west-2')
-
-    filters = [
-        {
-            'Name': 'private-ip-address',
-            'Values': ['running']
-        }
-    ]
-        
-    #filter the instances
-    instances = ec2.instances.filter(Filters=filters)
-
-    #locate all running instances
-    #runningInstances = [instance.id for instance in instances]
-
-    #print the instances for logging purposes
-    #log.debug(runningInstances)
-    
-    
-#    log.debug(resp)
-    
-
-    
-    handler=urllib2.HTTPHandler(debuglevel=1)
-    opener = urllib2.build_opener(handler)
-    urllib2.install_opener(opener)
-    request = urllib2.Request("https://github.azc.ext.hp.com/api/v3/enterprise/settings/license", headers={"Authorization" : ghe_header})
-    log.debug (request)
-    
-    contents = urllib2.urlopen(request).read()
-
     return {
-        'text': "{0}".format(contents)
+        'text': "{0}".format('sorry, it is too complex for me...')
     }
