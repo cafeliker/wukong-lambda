@@ -76,7 +76,6 @@ def show_help_and_exit():
     """
 
 def ghe_orgs():
-    
     handler=urllib2.HTTPHandler(debuglevel=1)
     opener = urllib2.build_opener(handler)
     urllib2.install_opener(opener)
