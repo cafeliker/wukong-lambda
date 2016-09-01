@@ -74,7 +74,19 @@ def show_help_and_exit():
     ghe users     -   List github users
     ghe repos     -   List github reposes
     ghe license   -   Show Github license status
+    ghe monitor cpu [1d,1w,1mon]   -   Show the cpu monitor gragh of github server
+    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor gragh of github server
     """
+
+def ghe_monitor(par_options):
+    if len(par_options) < 2:
+        return 'There should be 2 parameter for monitor command.\n For example: monitor cpu 1d'
+    monitor_type = par_options[0]
+    monitor_time = par_options[1]
+    log.debug ('monitor_type :' + str(monitor_type))
+    log.debug ('monitor_time :' + str(monitor_time))
+    s3_gragh_url = 'https://s3.amazonaws.com/hp-wukong/' + str(monitor_type) + '_' + str(monitor_time) + '.png'
+    return s3_gragh_url
 
 def ghe_orgs(par_ghe_header):
     ghe_orgs_url = ghe_url + '/enterprise/stats/orgs'
@@ -125,8 +137,11 @@ def ghe_main(command, options):
         'orgs'    : ghe_orgs,
         'users'   : ghe_users,
         'repos'   : ghe_repos,
-        'license' : ghe_license
+        'license' : ghe_license,
+        'monitor' : ghe_monitor
         }
+    log.debug ('command :' + str(command))
+    log.debug ('options :' + str(options))
     obj = s3.Object(bucket_name='hp-wukong', key='ghe-token.txt')
     response = obj.get()
     ghe_token = response['Body'].read()
@@ -137,6 +152,8 @@ def ghe_main(command, options):
             return "I don't know the command '{command}'".format(command=command)
         else:
             return command_only_list[command](ghe_header);
+    else:
+        return command_only_list[command](options);
             
 
 def alert():
@@ -177,7 +194,7 @@ def lambda_handler(event, context):
 #        return {
 #            'text' : "I don't know what '{feature}' is. Perhaps you need to google it :-)".format(feature=feature)
 #        }
-        
+    log.debug ('feature: ' + str(feature))
 
     if (feature == 'help'):
         log.debug("showing help and exiting..")
