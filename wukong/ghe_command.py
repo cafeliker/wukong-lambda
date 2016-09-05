@@ -58,8 +58,6 @@ def ghe_main(command, options):
         'license' : ghe_license,
         'monitor' : ghe_monitor
         }
-    log.debug ('command :' + str(command))
-    log.debug ('options :' + str(options))
     obj = s3.Object(bucket_name=config.config["hp-wukong"], key=config.config["ghe_token_file"])
     response = obj.get()
     ghe_token = response['Body'].read()
