@@ -4,6 +4,9 @@ import logging
 import urllib2
 import json
 
+#setup simple logging for INFO
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
 
 s3 = boto3.resource('s3')
 ghe_url = config.config["ghe_url"]
