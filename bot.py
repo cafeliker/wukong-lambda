@@ -86,7 +86,6 @@ def alert():
 def lambda_handler(event, context):
     feature_list = {
         'help' : show_help_and_exit,
-        'ghe'  : ghe_main,
         'alert': alert
         }
     #assert context
