@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 import config
 import boto3
 import logging
