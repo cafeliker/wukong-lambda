@@ -9,7 +9,7 @@ log = logging.getLogger()
 log.setLevel(logging.DEBUG)
 
 s3 = boto3.resource('s3')
-ghe_url = config.config["ghe_url"]
+ghe_url = config.config["ghe_url"] + '/api/v3'
 
 def ghe_monitor(par_options):
     if len(par_options) < 2:
