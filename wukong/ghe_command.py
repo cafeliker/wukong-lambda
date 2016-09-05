@@ -1,14 +1,21 @@
 import config
+import boto3
+import logging
+import urllib2
+import json
 
-ghe_url = config.config["ghe_url"]
+#setup simple logging for INFO
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
+
+s3 = boto3.resource('s3')
+ghe_url = config.config["ghe_url"] + '/api/v3'
 
 def ghe_monitor(par_options):
     if len(par_options) < 2:
         return 'There should be 2 parameter for monitor command.\n For example: monitor cpu 1d'
     monitor_type = par_options[0]
     monitor_time = par_options[1]
-    log.debug ('monitor_type :' + str(monitor_type))
-    log.debug ('monitor_time :' + str(monitor_time))
     s3_gragh_url = 'https://s3.amazonaws.com/hp-wukong/' + str(monitor_type) + '_' + str(monitor_time) + '.png'
     return s3_gragh_url
 
@@ -18,7 +25,6 @@ def ghe_orgs(par_ghe_header):
     opener = urllib2.build_opener(handler)
     urllib2.install_opener(opener)
     request = urllib2.Request(ghe_orgs_url, headers={"Authorization" : par_ghe_header})
-    log.debug (request)
     contents = json.loads(urllib2.urlopen(request).read())
 
     return str(contents['total_orgs']) +  ' organizations, ' +  str(contents['disabled_orgs']) + ' disabled.\n ' + str(contents['total_teams']) + '  teams with ' + str(contents['total_team_members']) + ' members.'
@@ -29,7 +35,6 @@ def ghe_users(par_ghe_header):
     opener = urllib2.build_opener(handler)
     urllib2.install_opener(opener)
     request = urllib2.Request(ghe_users_url, headers={"Authorization" : par_ghe_header})
-    log.debug (request)
     contents = json.loads(urllib2.urlopen(request).read())
 
     return str(contents['total_users']) +  ' users, ' +  str(contents['admin_users']) + ' admins and ' + str(contents['suspended_users']) + ' suspended.'
@@ -40,7 +45,6 @@ def ghe_repos(par_ghe_header):
     opener = urllib2.build_opener(handler)
     urllib2.install_opener(opener)
     request = urllib2.Request(ghe_repos_url, headers={"Authorization" : par_ghe_header})
-    log.debug (request)
     contents = json.loads(urllib2.urlopen(request).read())
 
     return str(contents['total_repos']) +  ' repositories, ' +  str(contents['root_repos']) + ' root and ' + str(contents['fork_repos']) + ' forks.\n' + str(contents['org_repos']) + ' in organizations.\n' + str(contents['total_pushes']) + ' pushes in total.\n' + str(contents['total_wikis']) + ' wikis.'
@@ -51,7 +55,6 @@ def ghe_license(par_ghe_header):
     opener = urllib2.build_opener(handler)
     urllib2.install_opener(opener)
     request = urllib2.Request(ghe_license_url, headers={"Authorization" : par_ghe_header})
-    log.debug (request)
     contents = json.loads(urllib2.urlopen(request).read())
 
     return 'The GHE has ' + str(contents['seats']) +  'seats, and' +  str(contents['seats_used']) + ' are used, ' + str(contents['seats_available']) + ' seats available, License expires at ' + str(contents['expire_at'])
@@ -66,11 +69,10 @@ def ghe_main(command, options):
         }
     log.debug ('command :' + str(command))
     log.debug ('options :' + str(options))
-    obj = s3.Object(bucket_name=config.config["hp-wukong"], key=config.config["ghe_token_file"])
+    obj = s3.Object(bucket_name=str(config.config["s3_bucket"]), key=str(config.config["ghe_token_file"]))
     response = obj.get()
     ghe_token = response['Body'].read()
     ghe_header = 'token ' + str(ghe_token)
-    log.debug ('ghe toke = ' + ghe_header)
     if (options == ''):
         if command not in command_only_list:
             return "I don't know the command '{command}'".format(command=command)
