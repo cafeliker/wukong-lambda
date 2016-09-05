@@ -69,7 +69,7 @@ def ghe_main(command, options):
         }
     log.debug ('command :' + str(command))
     log.debug ('options :' + str(options))
-    obj = s3.Object(bucket_name=config.config["s3_bucket"], key=config.config["ghe_token_file"])
+    obj = s3.Object(bucket_name=str(config.config["s3_bucket"]), key=str(config.config["ghe_token_file"]))
     response = obj.get()
     ghe_token = response['Body'].read()
     ghe_header = 'token ' + str(ghe_token)
