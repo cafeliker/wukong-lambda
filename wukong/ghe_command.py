@@ -2,6 +2,7 @@ import config
 import boto3
 import logging
 import urllib2
+import json
 
 
 s3 = boto3.resource('s3')
