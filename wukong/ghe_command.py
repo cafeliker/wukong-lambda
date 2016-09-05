@@ -1,4 +1,8 @@
 import config
+import boto3
+import logging
+import urllib2
+
 
 s3 = boto3.resource('s3')
 ghe_url = config.config["ghe_url"]
