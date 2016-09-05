@@ -4,7 +4,7 @@ import urllib2
 import json
 import re
 import wukong.ghe_command
-import wukong.config
+import config
 
 
 #setup simple logging for INFO
