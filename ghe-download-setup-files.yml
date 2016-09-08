@@ -1,7 +1,0 @@
----
-- name: Download files used to setup GHE servers. This includes files that are used to run Ansible playbooks.
-  hosts: localhost
-  connection: local
-  gather_facts: false
-  roles:
-  - ghe-download-setup-files
