@@ -6,7 +6,7 @@ This is a bot service named wukong and running in AWS Lambda. After a little tec
 Slack room is at https://huaguomountain.slack.com.
 
 ## Installation
-1. Clone this repo and zip the codes
+1. Clone this repo and put the proper values in the config.py, and then zip the codes
 2. Create a Lambda function with runtime Python 2.7, and upload the zip package and choose Handler as bot.lambda_handler, and then select a Role with AWS S3 and EC2 access
 3. Create an API Gateway API
 4. Create a method of type: POST
