@@ -131,6 +131,12 @@ def lambda_handler(event, context):
         return {
             'text' : identify_problem(raw_args)
             }
+
+    if (feature == 'RECOVERY'):
+        log.debug("Recover encountered")
+        return {
+            'text' : "I'm very happy that you're back up again :-)"
+            }
         
     return {
         'text': "{0}".format('sorry, it is too complex for me...')
