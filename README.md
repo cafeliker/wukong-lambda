@@ -81,10 +81,7 @@ Slack room is at https://huaguomountain.slack.com.
  "$util.urlDecode($kvTokenised[0])" : #if($kvTokenised[1].length() > 0)"$util.urlDecode($kvTokenised[1])"#{else}""#end#if( $foreach.hasNext ),#end
 #end
 }
-
-
-
-
+```
 
 ## Reference:
 The AWS competition information can be found at http://awschatbot.devpost.com/
