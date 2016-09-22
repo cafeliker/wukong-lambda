@@ -13,17 +13,19 @@ log.setLevel(logging.DEBUG)
 
 s3 = boto3.resource('s3')
 
-# Starts a instance given an Amazon instance
 def start_instance(instance):
     try:
         log.info("Starting instance " + instance.id)
+        log.info("Waiting for instance to stop")
+        instance.wait_until_stopped()
+        log.info("Finish waiting. Instance presumably stopped")
         instance.start()
         log.info("Finish running start instance")
         return 'starting the ec2 instance {0} with IP address {1}'.format(instance.id, instance.private_ip_address)
     except Exception, e2:
         log.error("Unable to start instance " + instance.id)
         error2 = "Error2: %s" % str(e2)
-        return 'start the ec2 instance ' + instance.id + ' failed: ' + error2
+        return 'start the ec2 instance ' + instance.id + ' failed: ' + error`
 
 
 # starts a machine given the IP address of the machine
