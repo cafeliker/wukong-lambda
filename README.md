@@ -84,4 +84,5 @@ Slack room is at https://huaguomountain.slack.com.
 ```
 
 ## Reference:
-The AWS competition information can be found at http://awschatbot.devpost.com/
+* The AWS competition information can be found at http://awschatbot.devpost.com/
+* AWS Serverless Chatbot Sample https://github.com/awslabs/aws-serverless-chatbot-sample
