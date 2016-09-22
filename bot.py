@@ -25,7 +25,7 @@ def start_instance(instance):
     except Exception, e2:
         log.error("Unable to start instance " + instance.id)
         error2 = "Error2: %s" % str(e2)
-        return 'start the ec2 instance ' + instance.id + ' failed: ' + error`
+        return 'start the ec2 instance ' + instance.id + ' failed: ' + error2
 
 
 # starts a machine given the IP address of the machine
