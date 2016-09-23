@@ -72,13 +72,13 @@ def identify_problem(err_msg):
 # shows the help page
 def show_help_and_exit():
     return """
-    help          -   print this help page
-    ghe orgs      -   Lists orgs using GHEs
-    ghe users     -   List github users
-    ghe repos     -   List github reposes
-    ghe license   -   Show Github license status
-    ghe monitor cpu [1d,1w,1mon]   -   Show the cpu monitor graph of github server
-    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor graph of github server
+     help                              -   print this help page
+    ghe orgs                          -   Lists orgs using github enterprise
+    ghe users                         -   List github enterprise users
+    ghe repos                         -   List github enterprise reposes
+    ghe license                       -   Show github enterprise license status
+    ghe monitor cpu [1d,1w,1mon]      -   Show the cpu monitor graph of github servers
+    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor graph of github servers
     """
 
 
@@ -141,5 +141,5 @@ def lambda_handler(event, context):
             }
         
     return {
-        'text': "{0}".format('sorry, it is too complex for me...')
+        'text': "{0}".format("Sorry, I didn't understand. Please use Wukong help") 
     }
