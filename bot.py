@@ -77,8 +77,8 @@ def show_help_and_exit():
     ghe users     -   List github users
     ghe repos     -   List github reposes
     ghe license   -   Show Github license status
-    ghe monitor cpu [1d,1w,1mon]   -   Show the cpu monitor gragh of github server
-    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor gragh of github server
+    ghe monitor cpu [1d,1w,1mon]   -   Show the cpu monitor graph of github server
+    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor graph of github server
     """
 
 
