@@ -74,14 +74,13 @@ def show_help_and_exit():
     return """
     ```
 
-    help                              -   print this help page
+    help                              -   Print this help page
     ghe orgs                          -   Lists orgs using github enterprise
     ghe users                         -   List github enterprise users
     ghe repos                         -   List github enterprise reposes
     ghe license                       -   Show github enterprise license status
-    ghe monitor cpu [1d,1w,1mon]      -   Show the cpu monitor graph of github servers
-    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor graph of github servers
-
+    ghe monitor cpu [1d,1w,1mon]      -   Show the cpu monitor graph of github enterprise servers
+    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor graph of github enterprise servers
     ```
     """
 
