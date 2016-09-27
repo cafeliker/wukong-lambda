@@ -13,10 +13,12 @@ log.setLevel(logging.DEBUG)
 
 s3 = boto3.resource('s3')
 
-# Starts a instance given an Amazon instance
 def start_instance(instance):
     try:
         log.info("Starting instance " + instance.id)
+        log.info("Waiting for instance to stop")
+        instance.wait_until_stopped()
+        log.info("Finish waiting. Instance presumably stopped")
         instance.start()
         log.info("Finish running start instance")
         return 'starting the ec2 instance {0} with IP address {1}'.format(instance.id, instance.private_ip_address)
@@ -70,13 +72,16 @@ def identify_problem(err_msg):
 # shows the help page
 def show_help_and_exit():
     return """
-    help          -   print this help page
-    ghe orgs      -   Lists orgs using GHEs
-    ghe users     -   List github users
-    ghe repos     -   List github reposes
-    ghe license   -   Show Github license status
-    ghe monitor cpu [1d,1w,1mon]   -   Show the cpu monitor gragh of github server
-    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor gragh of github server
+    ```
+
+    help                              -   Print this help page
+    ghe orgs                          -   Lists orgs using github enterprise
+    ghe users                         -   List github enterprise users
+    ghe repos                         -   List github enterprise reposes
+    ghe license                       -   Show github enterprise license status
+    ghe monitor cpu [1d,1w,1mon]      -   Show the cpu monitor graph of github enterprise servers
+    ghe monitor memory [1d,1w,1mon]   -   Show the memory monitor graph of github enterprise servers
+    ```
     """
 
 
@@ -131,7 +136,13 @@ def lambda_handler(event, context):
         return {
             'text' : identify_problem(raw_args)
             }
+
+    if (feature == 'RECOVERY'):
+        log.debug("Recover encountered")
+        return {
+            'text' : "I'm very happy that you're back up again :-)"
+            }
         
     return {
-        'text': "{0}".format('sorry, it is too complex for me...')
+        'text': "{0}".format("Sorry, I didn't understand. Please use Wukong help") 
     }
