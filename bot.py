@@ -1,3 +1,12 @@
+########################################################################################
+#
+#	bot.py
+#
+#	The main program file of the serverless chatbot hackathon contest
+#	Does self-healing and allows users to query Github Enterprise (GHE) statuses 
+#
+#########################################################################################
+
 import boto3
 import logging
 import urllib2
@@ -26,7 +35,7 @@ def show_help_and_exit():
     ```
     """
 
-
+# Our main entry point
 def lambda_handler(event, context):
     #log.debug(event)
     bot_event = event

@@ -14,7 +14,7 @@ log = logging.getLogger()
 log.setLevel(logging.DEBUG)
 
 
-
+# Start an AWS instance given an instance object
 def start_instance(instance):
     try:
         log.info("Starting instance " + instance.id)
