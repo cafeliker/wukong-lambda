@@ -2,16 +2,14 @@ import boto3
 import logging
 import urllib2
 import json
-import re
 import ghe.ghe_command
+import aws.self_healing
 import config
 
 
 #setup simple logging for INFO
 log = logging.getLogger()
 log.setLevel(logging.DEBUG)
-
-s3 = boto3.resource('s3')
 
 # shows the help page
 def show_help_and_exit():
@@ -29,15 +27,7 @@ def show_help_and_exit():
     """
 
 
-def alert():
-    print "alert";
-    
 def lambda_handler(event, context):
-    feature_list = {
-        'help' : show_help_and_exit,
-        'alert': alert
-        }
-    #assert context
     #log.debug(event)
     bot_event = event
 
