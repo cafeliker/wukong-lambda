@@ -1,6 +1,19 @@
+############################################################
+#
+#	self_healing.py
+#
+#	Lambda functions related to self-healing feature
+#
+############################################################
 import logging
 import boto3
 import re
+
+# Setup logger
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
+
+
 
 def start_instance(instance):
     try:
