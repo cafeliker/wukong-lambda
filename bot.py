@@ -3,7 +3,7 @@ import logging
 import urllib2
 import json
 import re
-import wukong.ghe_command
+import ghe.ghe_command
 import config
 
 
@@ -128,7 +128,7 @@ def lambda_handler(event, context):
             
     if (feature == 'ghe'):
         return {
-            'text' : wukong.ghe_command.ghe_main(command, options)
+            'text' : ghe.ghe_command.ghe_main(command, options)
             }
             
     if (feature == 'PROBLEM'):
